@@ -23,6 +23,8 @@ func main() {
 		rules.NewRaftRule(),
 		rules.NewMongoRule(),
 		rules.NewPubsubRule(),
+		rules.NewManifoldsRule(),
+		rules.NewStartCountRule(),
 	}
 
 	if len(files) == 1 {
