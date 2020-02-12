@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/SimonRichardson/juju-inspect/rules"
@@ -23,6 +24,14 @@ func main() {
 		rules.NewMongoRule(),
 		rules.NewPubsubRule(),
 	}
+
+	if len(files) == 1 {
+		matches, err := filepath.Glob(files[0])
+		if err == nil && len(matches) > 0 {
+			files = matches
+		}
+	}
+
 	for _, file := range files {
 		f, err := os.Open(file)
 		if err != nil {
