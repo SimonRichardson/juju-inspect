@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/SimonRichardson/juju-inspect/rules"
 	"gopkg.in/yaml.v2"
@@ -19,6 +21,7 @@ func main() {
 	allRules := []Rule{
 		rules.NewRaftRule(),
 		rules.NewMongoRule(),
+		rules.NewPubsubRule(),
 	}
 	for _, file := range files {
 		f, err := os.Open(file)
@@ -53,7 +56,16 @@ func main() {
 	fmt.Println("")
 	for _, rule := range allRules {
 		fmt.Println(rule.Summary())
-		fmt.Println("\t", rule.Analyse())
+
+		analysis := rule.Analyse()
+
+		buf := new(bytes.Buffer)
+		scanner := bufio.NewScanner(strings.NewReader(analysis))
+		for scanner.Scan() {
+			fmt.Fprintf(buf, "\t%s\n", scanner.Text())
+		}
+
+		fmt.Printf("%s\n", buf.String())
 	}
 }
 

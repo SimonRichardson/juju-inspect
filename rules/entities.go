@@ -13,6 +13,11 @@ type Worker struct {
 }
 
 type WorkerReport struct {
-	Agent string `yaml:"agent"`
-	State string `yaml:"state"`
+	Agent   string                  `yaml:"agent"`
+	State   string                  `yaml:"state"`
+	Targets map[string]WorkerTarget `yaml:"targets"`
+}
+
+type WorkerTarget struct {
+	Status string
 }
