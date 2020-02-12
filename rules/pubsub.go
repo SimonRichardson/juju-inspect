@@ -37,14 +37,14 @@ func (r *PubsubRule) Run(name string, report Report) {
 }
 
 func (r *PubsubRule) Summary() string {
-	return "PubsubRule Forwarder:"
+	return "Pubsub Forwarder:"
 }
 
 func (r *PubsubRule) Analyse() string {
 	buf := new(bytes.Buffer)
 	for name, targets := range r.targets {
 		if !r.found[name] {
-			fmt.Fprintf(buf, "%s Pubsub not found\n", name)
+			fmt.Fprintf(buf, "%s pubsub-forwarder not found!\n", name)
 			continue
 		}
 		sort.Strings(targets)

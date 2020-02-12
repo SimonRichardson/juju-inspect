@@ -35,7 +35,7 @@ func (r *RaftRule) Analyse() string {
 	for name, ldr := range r.leaders {
 		if leader && ldr {
 			// Two or more leaders
-			return "Two or more leaders have been found in the files."
+			return "Two or more leaders have been found in the files!"
 		}
 		if ldr {
 			leader = true

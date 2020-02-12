@@ -35,7 +35,7 @@ func (r *MongoRule) Analyse() string {
 	for name, ldr := range r.primaries {
 		if primary && ldr {
 			// Two or more primaries
-			return "Two or more primaries have been found in the files."
+			return "Two or more primaries have been found in the files!"
 		}
 		if ldr {
 			primary = true
